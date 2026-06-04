@@ -71,6 +71,8 @@ def main():
             dens = obter_float("Densidade atual de veículos (ex: 20): ")
             v_livre = obter_float("Velocidade livre da via (ex: 100): ")
             cap_max = obter_float("Capacidade máxima (ex: 150): ")
+            while cap_max < comp * dens:
+                cap_max = obter_float("\nA capacidade máxima precisa ser maior ou igual à multiplicação entre o comprimento e a densidade, digite novamente.\n\nCapacidade máxima (ex: 150): ")
             exp_a = obter_float("Expoente 'a' da equação de velocidade (ex: 2): ")
             faixas = obter_int("Número de faixas (ex: 3): ")
 
@@ -91,6 +93,8 @@ def main():
             dens = obter_float("Densidade atual de veículos: ")
             v_livre = obter_float("Velocidade livre da rampa: ")
             cap_max = obter_float("Capacidade máxima: ")
+            while cap_max < comp * dens:
+                cap_max = obter_float("\nA capacidade máxima precisa ser maior ou igual à multiplicação entre o comprimento e a densidade, digite novamente.\n\nCapacidade máxima: ")
             exp_a = obter_float("Expoente 'a' da equação: ")
             
             # Tratamento de erro específico para texto
@@ -104,12 +108,12 @@ def main():
 
             rampa = Rampa(contador_id, comp, dens, v_livre, cap_max, exp_a, tipo, fluxo_ext)
             simulador.adicionar_elemento(rampa)
-            print(f" Rampa de {tipo} (ID: {contador_id}) adicionada com sucesso!")
+            print(f"Rampa de {tipo} (ID: {contador_id}) adicionada com sucesso!")
             contador_id += 1
 
         elif opcao == "3":
             if not simulador.obter_estado_atual():
-                print("\n Nenhuma via adicionada! Adicione elementos antes de simular.")
+                print("\nNenhuma via adicionada! Adicione elementos antes de simular.")
                 continue
                 
             passos = obter_int("\nQuantos passos de tempo deseja simular? ")
@@ -129,19 +133,19 @@ def main():
 
             try:
                 banco.salvar_cenario(nome_cenario, estado)
-                print(f" Cenário '{nome_cenario}' salvo com sucesso na base de dados!")
+                print(f"Cenário '{nome_cenario}' salvo com sucesso na base de dados!")
             except Exception as e:
-                print(f" Erro ao salvar: {e}")
+                print(f"Erro ao salvar: {e}")
 
         elif opcao == "5":
             nome_cenario = input("\nDigite o nome do cenário que deseja carregar: ")
             try:
                 dados = banco.carregar_cenarios(nome_cenario)
-                print(f" Cenário '{nome_cenario}' carregado! Dados brutos: {dados}")
+                print(f"Cenário '{nome_cenario}' carregado! Dados brutos: {dados}")
             except FileNotFoundError:
-                print(" Erro: Arquivo de cenário não encontrado.")
+                print("Erro: Arquivo de cenário não encontrado.")
             except Exception as e:
-                print(f" Erro ao carregar: {e}")
+                print(f"Erro ao carregar: {e}")
 
         elif opcao == "6":
             exibir_ajuda()
@@ -151,7 +155,7 @@ def main():
             break
             
         else:
-            print("\n Opção inválida. Digite um número de 0 a 5.")
+            print("\nOpção inválida. Digite um número de 0 a 5.")
 
 if __name__ == "__main__":
     main()
