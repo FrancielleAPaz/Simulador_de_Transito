@@ -8,6 +8,9 @@ class SimuladorTrafego:
 
         self.__banco = BancoDados()
 
+    def get_elementos_via(self):
+        return self.__elementos_via
+    
     def adicionar_elemento(self, elemento):
         self.__elementos_via.append(elemento)
 
